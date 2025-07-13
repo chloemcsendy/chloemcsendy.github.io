@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dear Advisor</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #F4F0E6; 
+            color: #3A4F63; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            image-rendering: pixelated;
+        }
+
+        /* Floating client images */
+        .floating-client {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.7;
+            z-index: -1;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(5deg); }
+            50% { transform: translate(100px, 0) rotate(0deg); }
+            75% { transform: translate(50px, -50px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .floating-client {
+            width: 80px;
+            height: 80px;
+            opacity: 0.6;
+        }
+        .client1 { animation-delay: 0s; top: 3%; left: 2%; animation-duration: 35s; }
+        .client2 { animation-delay: -8s; top: 5%; left: 93%; animation-duration: 28s; }
+        .client3 { animation-delay: -15s; top: 92%; left: 7%; animation-duration: 42s; }
+        .client4 { animation-delay: -4s; top: 88%; left: 88%; animation-duration: 31s; }
+        .client5 { animation-delay: -12s; top: 12%; left: 15%; animation-duration: 38s; }
+        .client6 { animation-delay: -19s; top: 83%; left: 72%; animation-duration: 27s; }
+        .client7 { animation-delay: -3s; top: 25%; left: 83%; animation-duration: 45s; }
+        .client8 { animation-delay: -11s; top: 73%; left: 12%; animation-duration: 33s; }
+        .client9 { animation-delay: -7s; top: 8%; left: 65%; animation-duration: 40s; }
+        .client10 { animation-delay: -14s; top: 78%; left: 35%; animation-duration: 25s; }
+        .client11 { animation-delay: -2s; top: 22%; left: 38%; animation-duration: 48s; }
+        .client12 { animation-delay: -9s; top: 97%; left: 22%; animation-duration: 29s; }
+        .client13 { animation-delay: -17s; top: 4%; left: 78%; animation-duration: 36s; }
+        .client14 { animation-delay: -22s; top: 96%; left: 82%; animation-duration: 32s; }
+        .client16 { animation-delay: -24s; top: 68%; left: 92%; animation-duration: 26s; }
+        .client17 { animation-delay: -5s; top: 37%; left: 3%; animation-duration: 50s; }
+        .client19 { animation-delay: -20s; top: 13%; left: 97%; animation-duration: 24s; }
+        .client20 { animation-delay: -6s; top: 58%; left: 94%; animation-duration: 47s; }
+        .client21 { animation-delay: -16s; top: 94%; left: 4%; animation-duration: 31s; }
+        .client22 { animation-delay: -23s; top: 32%; left: 73%; animation-duration: 37s; }
+        .client23 { animation-delay: -7.5s; top: 63%; left: 27%; animation-duration: 52s; }
+        .client24 { animation-delay: -18s; top: 3%; left: 33%; animation-duration: 28s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            15% { transform: translate(30px, 40px) rotate(8deg); }
+            30% { transform: translate(70px, 10px) rotate(-5deg); }
+            45% { transform: translate(120px, 50px) rotate(12deg); }
+            60% { transform: translate(80px, -30px) rotate(-8deg); }
+            75% { transform: translate(40px, -60px) rotate(5deg); }
+            90% { transform: translate(-20px, -30px) rotate(-3deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* Laptop intro screen */
+        #intro-container {
+            width: 960px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        #laptop-screen {
+            width: 960px;
+            height: 540px;
+            background-color: #F8F4E3;
+            border: 12px solid #3A4F63;
+            border-top: 40px solid #3A4F63;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 0 0 4px #E8D4B0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #webcam {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: #1E2B38;
+            border-radius: 50%;
+        }
+
+        #laptop-stem {
+            width: 240px;
+            height: 15px;
+            background: #2A3C4D;
+            border-radius: 0 0 5px 5px;
+        }
+
+        #laptop-base {
+            width: 400px;
+            height: 20px;
+            background: #3A4F63;
+            border-radius: 0 0 15px 15px;
+        }
+
+        #screen-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #intro-title {
+            color: #3A4F63;
+            font-size: 72px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 0px rgba(58, 79, 99, 0.2);
+            z-index: 2;
+        }
+
+        #intro-subtitle {
+            color: #3A4F63;
+            font-size: 24px;
+            margin-bottom: 60px;
+            z-index: 2;
+        }
+
+        #click-prompt {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            color: rgba(58, 79, 99, 0.7);
+            font-size: 16px;
+            animation: pulse 2s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .intro-pixel {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #3A4F63;
+            opacity: 0.3;
+            z-index: 1;
+            animation: float 15s infinite linear;
+            border-radius: 2px;
+        }
+
+        #game-container {
+            width: 960px;
+            height: 540px;
+            background-color: #F8F4E3;
+            border: 8px solid #3A4F63;
+            box-shadow: 
+                0 0 15px rgba(58, 79, 99, 0.6),
+                0 0 30px rgba(232, 212, 176, 0.8);
+            position: relative;
+            overflow: hidden;
+            display: none;
+            animation: 
+                frameGlow 2s ease-in-out infinite alternate,
+                gentleWiggle 5s ease-in-out infinite;
+        }
+        
+
+        @keyframes frameGlow {
+            0% {
+                box-shadow: 
+                    0 0 15px rgba(58, 79, 99, 0.6),
+                    0 0 30px rgba(232, 212, 176, 0.8);
+            }
+            100% {
+                box-shadow: 
+                    0 0 25px rgba(58, 79, 99, 0.8),
+                    0 0 50px rgba(232, 212, 176, 1);
+            }
+        }
+
+        @keyframes gentleWiggle {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-3px) rotate(-0.5deg); }
+            50% { transform: translateX(3px) rotate(0.5deg); }
+            75% { transform: translateX(-3px) rotate(-0.5deg); }
+        }
+
+        .scene {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .active {
+            display: flex;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        #id-card-container {
+            width: 600px;
+            height: 450px;
+            background-color: white;
+            border: 8px solid #3A4F63;
+            box-shadow: 0 0 0 4px #3A4F63;
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden; 
+            border-radius: 10px; 
+        }
+
+        #id-card-left {
+            width: 150px;
+            height: 100%;
+            background-color: #3A4F63;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+
+        #id-card-title {
+            color: #F8F4E3;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        #id-card-logo {
+            font-size: 24px;
+            color: #F8F4E3;
+            font-weight: bold;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        #camera-container {
+            width: 120px;
+            height: 120px;
+            background-color: #F8F4E3;
+            border: 2px solid #E8D4B0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #camera-preview, #photo-result {
+            width: 120px;
+            height: 120px;
+            display: none;
+            object-fit: cover;
+        }
+
+        #camera-placeholder {
+            font-size: 12px;
+            text-align: center;
+            color: #3A4F63;
+            padding: 10px;
+        }
+
+        #id-card-right {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #id-card-header {
+            border-bottom: 2px solid #3A4F63;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        #id-card-company {
+            font-size: 18px;
+            font-weight: bold;
+            color: #3A4F63;
+            margin-bottom: 5px;
+        }
+
+        #id-card-subtitle {
+            font-size: 12px;
+            color: #3A4F63;
+        }
+
+        #name-input {
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            border: 2px solid #3A4F63;
+            background-color: #F8F4E3;
+            width: 90%;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .id-card-field {
+            margin-bottom: 8px;
+        }
+
+        .id-card-label {
+            font-size: 10px;
+            color: #3A4F63;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .id-card-value {
+            font-size: 14px;
+            color: #3A4F63;
+            padding-left: 5px;
+        }
+
+        #id-card-footer {
+            font-size: 10px;
+            color: #3A4F63;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .button {
+            padding: 12px 24px;
+            background-color: #3A4F63;
+            color: #F8F4E3;
+            border: none;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid #3A4F63;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background-color: #F8F4E3;
+            color: #3A4F63;
+        }
+
+        /* Scene 2 Specific Styles */
+        #scene2 {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #scene2-content {
+            position: relative;
+            display: flex;
+            width: 90%;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+            height: 80%;
+        }
+
+        #boss-image {
+            width: 300px;
+            height: 300px;
+            transform: translateX(-400px);
+            animation: slideInFromLeft 0.5s forwards 0.5s ease-out;
+        }
+
+        #laptop-image {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            bottom: -100px;
+            right: 20px;
+            z-index: 2;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+            transform: translateX(400px);
+            animation: slideInFromRight 0.5s forwards 0.5s ease-out;
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-400px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        #text-bubble {
+            position: relative;
+            background: #F8F4E3;
+            border: 3px solid #3A4F63;
+            border-radius: 20px;
+            padding: 30px;
+            width: 500px;
+            margin-left: -10px;
+            box-shadow: 4px 4px 0 rgba(58, 79, 99, 0.2);
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
+            opacity: 0;
+            animation: fadeIn 1s forwards 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Rest of your existing styles... */
+        #book-container {
+            width: 700px;
+            height: 400px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+
+        #book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+
+        .page-front, .page-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-image: url('notebook.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .page-back {
+            transform: rotateY(180deg);
+        }
+
+        .flipped {
+            transform: rotateY(180deg);
+        }
+
+        .page-content {
+            width: 80%;
+            height: 80%;
+            text-align: center;
+            line-height: 1.6;
+            overflow-y: auto;
+        }
+
+        .page-content h2 {
+            color: #3A4F63;
+            margin-bottom: 20px;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            font-size: 14px;
+            color: #3A4F63;
+        }
+
+        #user-profile {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #3A4F63;
+            overflow: hidden;
+            display: none;
+            background-color: #D9D2C5;
+        }
+
+        #user-profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        #client-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        #client-avatar {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+        
+        #activity-content {
+            display: flex;
+            height: 280px;
+            gap: 20px;
+        }
+        
+        #image-container {
+            width: 25%;
+            height: 90%;
+            border: 3px solid #3A4F63;
+            background-color: #D9D2C5;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #suspicious-image {
+            width: 100%;
+            height: 109%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        
+        #options-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .option {
+            background: #F8F4E3;
+            border: 2px solid #3A4F63;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .option:hover {
+            background: #3A4F63;
+            color: #F8F4E3;
+        }
+        
+        .option.selected {
+            background: #3A4F63;
+            color: #F8F4E3;
+            box-shadow: 0 0 0 2px #E8D4B0;
+        }
+        
+        #feedback-container {
+            background: #F8F4E3;
+            padding: 15px;
+            margin-top: -5px;
+            display: none;
+        }
+        
+        #feedback-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        #feedback-avatar {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+
+        #game-container {
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-out {
+            opacity: 0;
+        }
+        .feedback-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: -20px;
+        }
+
+        #continue-button {
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+<!-- Floating client images -->
+<img src="client1_happy.png" class="floating-client client1" alt="Client">
+<img src="client1_doubt.png" class="floating-client client2" alt="Client">
+<img src="client1_upset.png" class="floating-client client3" alt="Client">
+<img src="client2_doubt.png" class="floating-client client4" alt="Client">
+<img src="client2_happy.png" class="floating-client client5" alt="Client">
+<img src="client2_upset.png" class="floating-client client6" alt="Client">
+<img src="client3_doubt.png" class="floating-client client7" alt="Client">
+<img src="client3_upset.png" class="floating-client client8" alt="Client">
+<img src="client4_doubt.png" class="floating-client client9" alt="Client">
+<img src="client4_happy.png" class="floating-client client10" alt="Client">
+<img src="client5_doubt.png" class="floating-client client11" alt="Client">
+<img src="client5_happy.png" class="floating-client client12" alt="Client">
+<img src="client7.png" class="floating-client client13" alt="Client">
+<img src="client8.png" class="floating-client client14" alt="Client">
+<img src="client9.png" class="floating-client client15" alt="Client">
+<img src="client10.png" class="floating-client client16" alt="Client">
+<img src="client11.png" class="floating-client client17" alt="Client">
+<img src="client12.png" class="floating-client client18" alt="Client">
+<img src="client13.png" class="floating-client client19" alt="Client">
+<img src="client14.png" class="floating-client client20" alt="Client">
+<img src="client16.png" class="floating-client client22" alt="Client">
+<img src="client17.png" class="floating-client client23" alt="Client">
+
+<!-- Laptop intro screen -->
+<div id="intro-container">
+    <div id="laptop-screen">
+        <div id="webcam"></div>
+        <div id="screen-content">
+            <h1 id="intro-title">DEAR ADVISOR</h1>
+            <p id="intro-subtitle">Digital Security Consultation</p>
+            <div id="click-prompt">click anywhere to continue</div>
+            <!-- Intro pixels will be added -->
+        </div>
+    </div>
+    <div id="laptop-stem"></div>
+    <div id="laptop-base"></div>
+</div>
+
+<!-- Main game container (hidden initially) -->
+<div id="game-container">
+    <!-- User Profile (persistent across scenes) -->
+    <div id="user-profile">
+        <img id="user-profile-img" src="" alt="Your Profile">
+    </div>
+
+    <!-- Scene 1: Introduction -->
+    <div class="scene active" id="scene1">
+        <h1>Create Your Advisor ID</h1>
+        <div id="id-card-container">
+            <div id="id-card-left">
+                <div id="id-card-title">DIGITAL SECURITY</div>
+                <div id="id-card-logo">DA</div>
+                <div id="camera-container">
+                    <video id="camera-preview" autoplay playsinline></video>
+                    <canvas id="photo-canvas" style="display:none;"></canvas>
+                    <img id="photo-result" alt="Captured Photo">
+                    <div id="camera-placeholder">Photo</div>
+                </div>
+            </div>
+            <div id="id-card-right">
+                <div id="id-card-header">
+                    <div id="id-card-company">DEAR ADVISOR</div>
+                    <div id="id-card-subtitle">Digital Security Consultant</div>
+                </div>
+                <div>
+                    <div class="id-card-field">
+                        <div class="id-card-label">Name</div>
+                        <input type="text" id="name-input" placeholder="Full Name">
+                    </div>
+                    <div class="id-card-field">
+                        <div class="id-card-label">Employee ID</div>
+                        <div class="id-card-value" id="employee-id">DA-<span id="random-id">0000</span></div>
+                    </div>
+                    <div class="id-card-field">
+                        <div class="id-card-label">Issue Date</div>
+                        <div class="id-card-value" id="issue-date">Loading...</div>
+                    </div>
+                </div>
+                <div id="id-card-footer">Valid until further notice</div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="button" id="camera-button">Take Photo</button>
+            <button class="button" id="start-button" disabled>Start</button>
+        </div>
+    </div>
+
+    <!-- Scene 2: Boss Welcome -->
+    <div class="scene" id="scene2">
+        <div id="scene2-content">
+            <img src="boss.png" alt="Boss" id="boss-image">
+            <div id="text-bubble">
+                <div id="text-bubble-content">
+                    Welcome <span id="user-name-display"></span> to your first day at work! 
+                    As a digital advisor, you will be receiving messages from troubled users 
+                    facing modern media and AI-related threats.
+                </div>
+            </div>
+            <img src="laptop.png" alt="laptop" id="laptop-image">
+        </div>
+        <button class="button" id="next-button">Next</button>
+    </div>
+
+    <!-- Scene 3: Guide Book -->
+    <div class="scene" id="scene3">
+        <h1>Advisor's Guide to AI Threats</h1>
+        <div id="book-container">
+            <div id="book">
+                <div class="page-front">
+                    <div class="page-content">
+                        <h2>Understanding AI-Generated Harms</h2>
+                        <p>Online harms are becoming harder to detect with the rise of generative AI, which can create convincing fake images, videos, and voice messages. To stay safe, users should look out for common red flags.</p>
+                    </div>
+                    <div class="page-number">1/2</div>
+                </div>
+                <div class="page-back">
+                    <div class="page-content">
+                        <h2>Red Flags to Watch For</h2>
+                        <p>Unusually perfect or distorted facial features in photos, inconsistent lighting or backgrounds, social media profiles with few posts or followers, and voice messages that sound off or robotic.</p>
+                        <p>Messages that create urgency are often scams. Always verify identities through trusted channels, avoid sharing personal data too quickly, and use tools like reverse image search to check the source of suspicious content.</p>
+                    </div>
+                    <div class="page-number">2/2</div>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="button" id="flip-button">Flip Page</button>
+            <button class="button" id="ready-button">I'm Ready!</button>
+        </div>
+    </div>
+
+    <!-- Scene 4: Fake Friend Request Activity -->
+    <div class="scene" id="scene4">
+        <h1> CLIENT 1</h1>
+        <div id="activity-container">
+            <div id="client-header">
+                <img src="client1_doubt.png" id="client-avatar" alt="Client">
+                <div id="client-message">
+                    "Hey Advisor...my friend claimed that she got hacked and made a new account, asking me to meet up. 
+                    But something feels off about her post...what is it?"
+                </div>
+            </div>
+            
+            <div id="activity-content">
+                <div id="image-container">
+                    <img src="activity1_fake.png" id="suspicious-image" alt="Suspicious Profile">
+                    <!-- Hotspots added dynamically -->
+                </div>
+                
+                <div id="options-section">
+                    <div id="options-container">
+                        <div class="option" data-option="warped background">Warped background</div>
+                        <div class="option" data-option="missing fingers">Missing fingers</div>
+                        <div class="option" data-option="extra hand">Extra hand</div>
+                        <div class="option" data-option="watermark">Watermark</div>
+                        <div class="option" data-option="distorted face">Distorted face</div>
+                        <div class="option" data-option="no party balloons">No party balloons</div>
+                    </div>
+                    
+                    <button class="button" id="submit-answers">Submit Answers</button>
+                    
+                    <div id="feedback-container">
+                        <div id="feedback-content">
+                            <img src="" id="feedback-avatar" alt="Feedback">
+                            <div id="feedback-text"></div>
+                        </div>
+                        <div class="feedback-buttons">
+                            <button class="button" id="try-again-button">Try Again</button>
+                            <button class="button" id="continue-button">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // intro pixels
+    const screenContent = document.getElementById('screen-content');
+    const colors = ['#3A4F63', '#E8D4B0', '#8C7B6B', '#6B8C9E'];
+    
+    for (let i = 0; i < 25; i++) {
+        const pixel = document.createElement('div');
+        pixel.className = 'intro-pixel';
+        
+        const size = Math.random() * 10 + 8;
+        pixel.style.width = `${size}px`;
+        pixel.style.height = `${size}px`;
+        pixel.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        pixel.style.opacity = Math.random() * 0.3 + 0.1;
+        pixel.style.left = `${Math.random() * 90 + 5}%`;
+        pixel.style.top = `${Math.random() * 90 + 5}%`;
+        pixel.style.animation = `float ${Math.random() * 10 + 10}s infinite ${Math.random() * -20}s linear`;
+        
+        screenContent.appendChild(pixel);
+    }
+
+    // Transition from intro to game
+    function startGame() {
+        document.getElementById('intro-container').style.display = 'none';
+        document.getElementById('game-container').style.display = 'block';
+        
+        // Generate random employee ID
+        document.getElementById('random-id').textContent = Math.floor(1000 + Math.random() * 9000);
+        
+        // Set current date
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('issue-date').textContent = today.toLocaleDateString('en-US', options);
+    }
+
+    document.addEventListener('click', startGame);
+    document.addEventListener('keydown', startGame);
+
+    // Original game JavaScript
+    const scene1 = document.getElementById('scene1');
+    const scene2 = document.getElementById('scene2');
+    const scene3 = document.getElementById('scene3');
+    const scene4 = document.getElementById('scene4');
+    const startButton = document.getElementById('start-button');
+    const nextButton = document.getElementById('next-button');
+    const readyButton = document.getElementById('ready-button');
+    const flipButton = document.getElementById('flip-button');
+    const nameInput = document.getElementById('name-input');
+    const userNameDisplay = document.getElementById('user-name-display');
+    const cameraButton = document.getElementById('camera-button');
+    const cameraPreview = document.getElementById('camera-preview');
+    const photoResult = document.getElementById('photo-result');
+    const photoCanvas = document.getElementById('photo-canvas');
+    const cameraPlaceholder = document.getElementById('camera-placeholder');
+    const book = document.getElementById('book');
+    const userProfile = document.getElementById('user-profile');
+    const userProfileImg = document.getElementById('user-profile-img');
+    const submitAnswersButton = document.getElementById('submit-answers');
+    const continueButton = document.getElementById('continue-button');
+
+    let currentScene = 1;
+    let isBookFlipped = false;
+    let userPhotoTaken = false;
+    let stream = null;
+
+    // Activity Configuration
+    const activityConfig = {
+        correctAnswers: ["warped background", "missing fingers", "extra hand", "watermark"],
+        hotspots: [
+            { top: "65%", left: "25%", option: "warped background" },
+            { top: "45%", left: "60%", option: "missing fingers" },
+            { top: "30%", left: "40%", option: "extra hand" },
+            { top: "85%", left: "80%", option: "watermark" }
+        ]
+    };
+    
+    // Game State
+    let selectedOptions = [];
+    let foundHotspots = [];
+
+    startButton.addEventListener('click', () => {
+        const userName = nameInput.value.trim();
+        if (userName === '') {
+            alert('Please enter your name to continue.');
+            return;
+        }
+        
+        if (!userPhotoTaken) {
+            alert('Please take your photo to continue.');
+            return;
+        }
+
+        userNameDisplay.textContent = userName;
+        scene1.classList.remove('active');
+        scene2.classList.add('active');
+        currentScene = 2;
+        userProfile.style.display = 'block';
+
+        // Reset animations when entering scene 2
+        document.getElementById('boss-image').style.animation = 'none';
+        document.getElementById('laptop-image').style.animation = 'none';
+        document.getElementById('text-bubble').style.animation = 'none';
+        
+        // Trigger reflow to restart animations
+        void document.getElementById('boss-image').offsetWidth;
+        void document.getElementById('laptop-image').offsetWidth;
+        void document.getElementById('text-bubble').offsetWidth;
+        
+        // Reapply animations
+        document.getElementById('boss-image').style.animation = 'slideInFromLeft 1s forwards 0.5s ease-out';
+        document.getElementById('laptop-image').style.animation = 'slideInFromRight 1s forwards 0.5s ease-out';
+        document.getElementById('text-bubble').style.animation = 'fadeIn 1s forwards 1.5s';
+    });
+
+    nextButton.addEventListener('click', () => {
+        scene2.classList.remove('active');
+        scene3.classList.add('active');
+        currentScene = 3;
+    });
+
+    flipButton.addEventListener('click', () => {
+        isBookFlipped = !isBookFlipped;
+        book.style.transform = isBookFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+    });
+
+    readyButton.addEventListener('click', () => {
+        scene3.classList.remove('active');
+        scene4.classList.add('active');
+        currentScene = 4;
+        initializeActivity();
+    });
+
+    continueButton.addEventListener('click', () => {
+        // Only allow continue if all answers are correct
+        const allCorrect = activityConfig.correctAnswers.every(answer => 
+            selectedOptions.includes(answer)) && 
+            selectedOptions.length === activityConfig.correctAnswers.length;
+        
+        if (allCorrect) {
+            // Save game state
+            localStorage.setItem('userProfileImg', userProfileImg.src);
+            localStorage.setItem('userName', nameInput.value.trim());
+            
+            // Fade out effect
+            document.getElementById('game-container').classList.add('fade-out');
+            
+            // Navigate after fade completes
+            setTimeout(() => {
+                window.location.href = "page2.html";
+            }, 500);
+        }
+    });
+
+    cameraButton.addEventListener('click', async () => {
+        if (cameraButton.textContent === 'Take Photo') {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: 300, 
+                        height: 300,
+                        facingMode: 'user' 
+                    } 
+                });
+                cameraPreview.srcObject = stream;
+                cameraPreview.style.display = 'block';
+                photoResult.style.display = 'none';
+                cameraPlaceholder.style.display = 'none';
+                cameraButton.textContent = 'Capture';
+            } catch (err) {
+                console.error("Camera error: ", err);
+                alert('Could not access the camera. Please ensure you have granted camera permissions.');
+            }
+        } else if (cameraButton.textContent === 'Capture') {
+            takePhoto();
+        } else if (cameraButton.textContent === 'Retake') {
+            cameraPreview.style.display = 'block';
+            photoResult.style.display = 'none';
+            cameraButton.textContent = 'Capture';
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: 300, 
+                        height: 300,
+                        facingMode: 'user' 
+                    } 
+                });
+                cameraPreview.srcObject = stream;
+            } catch (err) {
+                console.error("Camera error on retake: ", err);
+            }
+        }
+    });
+
+    function takePhoto() {
+        photoCanvas.width = cameraPreview.videoWidth;
+        photoCanvas.height = cameraPreview.videoHeight;
+        
+        const ctx = photoCanvas.getContext('2d');
+        ctx.drawImage(cameraPreview, 0, 0, photoCanvas.width, photoCanvas.height);
+        
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+        }
+        
+        const photoData = photoCanvas.toDataURL('image/png');
+        photoResult.src = photoData;
+        photoResult.style.display = 'block';
+        cameraPreview.style.display = 'none';
+        userProfileImg.src = photoData;
+        cameraButton.textContent = 'Retake';
+        startButton.disabled = false;
+        userPhotoTaken = true;
+    }
+
+    // Initialize Activity
+    function initializeActivity() {
+        selectedOptions = [];
+        foundHotspots = [];
+        
+        // Clear previous hotspots
+        document.querySelectorAll('.hotspot').forEach(el => el.remove());
+        
+        // Create new hotspots
+        activityConfig.hotspots.forEach((hotspot, index) => {
+            const hotspotEl = document.createElement('div');
+            hotspotEl.className = 'hotspot';
+            hotspotEl.style.top = hotspot.top;
+            hotspotEl.style.left = hotspot.left;
+            hotspotEl.textContent = (index + 1).toString();
+            hotspotEl.dataset.option = hotspot.option;
+            document.getElementById('image-container').appendChild(hotspotEl);
+            
+            // Add click handler
+            hotspotEl.addEventListener('click', function() {
+                if (!this.classList.contains('found')) {
+                    this.classList.add('found');
+                    foundHotspots.push(hotspot.option);
+                    
+                    // Auto-select the corresponding option
+                    const optionEl = document.querySelector(`.option[data-option="${hotspot.option}"]`);
+                    if (optionEl && !optionEl.classList.contains('selected')) {
+                        optionEl.classList.add('selected');
+                        if (!selectedOptions.includes(hotspot.option)) {
+                            selectedOptions.push(hotspot.option);
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Reset options
+        document.querySelectorAll('.option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        
+        // Hide feedback
+        document.getElementById('feedback-container').style.display = 'none';
+        document.getElementById('submit-answers').disabled = false;
+    }
+    
+    // Option Click Handler
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function() {
+            const optionValue = this.dataset.option;
+            
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+                selectedOptions = selectedOptions.filter(opt => opt !== optionValue);
+            } else {
+                this.classList.add('selected');
+                if (!selectedOptions.includes(optionValue)) {
+                    selectedOptions.push(optionValue);
+                }
+            }
+        });
+    });
+    
+    // Submit Answers Handler
+    submitAnswersButton.addEventListener('click', function() {
+        const allCorrect = activityConfig.correctAnswers.every(answer => 
+            selectedOptions.includes(answer)) && 
+            selectedOptions.length === activityConfig.correctAnswers.length;
+        
+        const feedbackContainer = document.getElementById('feedback-container');
+        const feedbackAvatar = document.getElementById('feedback-avatar');
+        const feedbackText = document.getElementById('feedback-text');
+        const tryAgainButton = document.getElementById('try-again-button');
+        const continueButton = document.getElementById('continue-button');
+        
+        if (allCorrect) {
+            feedbackAvatar.src = "client1_happy.png";
+            feedbackText.innerHTML = "<strong>Correct!</strong> These are the common signs of AI-generated images.";
+            tryAgainButton.style.display = 'none';
+            continueButton.style.display = 'block';
+        } else {
+            feedbackAvatar.src = "client1_upset.png";
+            const missedFlags = activityConfig.correctAnswers.filter(
+                answer => !selectedOptions.includes(answer)
+            );
+            
+            feedbackText.innerHTML = "<strong>Look closer!</strong><br>" +
+                (missedFlags.length > 0 ? 
+                "Always verify identities in case of impersonation online" + "<br>" : "");
+            tryAgainButton.style.display = 'block';
+            continueButton.style.display = 'none';
+        }
+        
+        feedbackContainer.style.display = 'block';
+        this.disabled = true;
+    });
+
+    // Add try again handler
+    document.getElementById('try-again-button').addEventListener('click', function() {
+        initializeActivity();
+        document.getElementById('feedback-container').style.display = 'none';
+        document.getElementById('submit-answers').disabled = false;
+    });
+</script>
+</body>
+</html>

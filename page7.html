@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dear Advisor - Crossword Activity</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #F4F0E6;
+      color: #3A4F63;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      image-rendering: pixelated;
+    }
+          
+    .floating-client {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      opacity: 0.7;
+      z-index: -1;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(50px, 50px) rotate(5deg); }
+      50% { transform: translate(100px, 0) rotate(0deg); }
+      75% { transform: translate(50px, -50px) rotate(-5deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    .floating-client {
+      width: 80px;
+      height: 80px;
+      opacity: 0.6;
+    }
+    .client1 { animation-delay: 0s; top: 3%; left: 2%; animation-duration: 35s; }
+    .client2 { animation-delay: -8s; top: 5%; left: 93%; animation-duration: 28s; }
+    .client3 { animation-delay: -15s; top: 92%; left: 7%; animation-duration: 42s; }
+    .client4 { animation-delay: -4s; top: 88%; left: 88%; animation-duration: 31s; }
+    .client5 { animation-delay: -12s; top: 12%; left: 15%; animation-duration: 38s; }
+    .client6 { animation-delay: -19s; top: 83%; left: 72%; animation-duration: 27s; }
+    .client7 { animation-delay: -3s; top: 25%; left: 83%; animation-duration: 45s; }
+    .client8 { animation-delay: -11s; top: 73%; left: 12%; animation-duration: 33s; }
+    .client9 { animation-delay: -7s; top: 8%; left: 65%; animation-duration: 40s; }
+    .client10 { animation-delay: -14s; top: 78%; left: 35%; animation-duration: 25s; }
+    .client11 { animation-delay: -2s; top: 22%; left: 38%; animation-duration: 48s; }
+    .client12 { animation-delay: -9s; top: 97%; left: 22%; animation-duration: 29s; }
+    .client13 { animation-delay: -17s; top: 4%; left: 78%; animation-duration: 36s; }
+    .client14 { animation-delay: -22s; top: 96%; left: 82%; animation-duration: 32s; }
+    .client16 { animation-delay: -24s; top: 68%; left: 92%; animation-duration: 26s; }
+    .client17 { animation-delay: -5s; top: 37%; left: 3%; animation-duration: 50s; }
+    .client19 { animation-delay: -20s; top: 13%; left: 97%; animation-duration: 24s; }
+    .client20 { animation-delay: -6s; top: 58%; left: 94%; animation-duration: 47s; }
+    .client21 { animation-delay: -16s; top: 94%; left: 4%; animation-duration: 31s; }
+    .client22 { animation-delay: -23s; top: 32%; left: 73%; animation-duration: 37s; }
+    .client23 { animation-delay: -7.5s; top: 63%; left: 27%; animation-duration: 52s; }
+    .client24 { animation-delay: -18s; top: 3%; left: 33%; animation-duration: 28s; }
+
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      15% { transform: translate(30px, 40px) rotate(8deg); }
+      30% { transform: translate(70px, 10px) rotate(-5deg); }
+      45% { transform: translate(120px, 50px) rotate(12deg); }
+      60% { transform: translate(80px, -30px) rotate(-8deg); }
+      75% { transform: translate(40px, -60px) rotate(5deg); }
+      90% { transform: translate(-20px, -30px) rotate(-3deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    #game-container {
+      width: 960px;
+      height: 540px;
+      background-color: #F8F4E3;
+      border: 8px solid #3A4F63;
+      box-shadow:
+        0 0 15px rgba(58, 79, 99, 0.6),
+        0 0 30px rgba(232, 212, 176, 0.8);
+      position: relative;
+      overflow: hidden;
+      animation:
+        frameGlow 2s ease-in-out infinite alternate,
+        gentleWiggle 5s ease-in-out infinite;
+    }
+    @keyframes frameGlow {
+    0% {
+        box-shadow: 
+            0 0 15px rgba(58, 79, 99, 0.6),
+            0 0 30px rgba(232, 212, 176, 0.8);
+    }
+    100% {
+        box-shadow: 
+            0 0 25px rgba(58, 79, 99, 0.8),
+            0 0 50px rgba(232, 212, 176, 1);
+    }
+}
+
+@keyframes gentleWiggle {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-3px) rotate(-0.5deg); }
+    50% { transform: translateX(3px) rotate(0.5deg); }
+    75% { transform: translateX(-3px) rotate(-0.5deg); }
+}
+
+    .scene {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .activity-container {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 880px;
+    }
+
+    .crossword {
+      display: grid;
+      grid-template-columns: repeat(4, 40px);
+      grid-template-rows: repeat(4, 40px);
+      gap: 10px;
+      padding-top: 15px;
+    }
+
+    .crossword input {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      border: 2px solid #3A4F63;
+      background: #fff;
+      color: #3A4F63;
+      border-radius: 4px;
+    }
+
+    .correct {
+      background-color: #c8e6c9;
+      border-color: #2e7d32;
+    }
+
+    .incorrect {
+      background-color: #ffcdd2;
+      border-color: #c62828;
+    }
+
+    .clues {
+      font-size: 15px;
+      text-align: left;
+      width: 500px;
+      padding-top: 5px;
+    }
+
+    .clues h2 {
+      margin-bottom: 5px;
+    }
+
+    .clues ul {
+      padding-left: 5px;
+      margin-top: 0;
+    }
+
+    .button {
+      padding: 12px 24px;
+      background-color: #3A4F63;
+      color: #F8F4E3;
+      border: none;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid #3A4F63;
+    }
+
+    .button:hover {
+      background-color: #F8F4E3;
+      color: #3A4F63;
+    }
+
+    .button:disabled {
+      background-color: #D9D2C5;
+      color: #9BA7B3;
+      border-color: #9BA7B3;
+      cursor: not-allowed;
+    }
+
+    #feedback {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #3A4F63;
+      text-align: center;
+    }
+
+    #user-profile {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid #3A4F63;
+      overflow: hidden;
+      background-color: #D9D2C5;
+    }
+
+    #user-profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #client-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      width: 90%;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    #client-avatar {
+      width: 100px;
+      height: 100px;
+      margin-right: 15px;
+    }
+    
+    #client-message {
+      flex: 1;
+      background: #F8F4E3;
+      padding: 15px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    
+    .button-container {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+
+    #game-container {
+      transition: opacity 0.5s ease;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <img src="client1_happy.png" class="floating-client client1" alt="Client">
+  <img src="client1_doubt.png" class="floating-client client2" alt="Client">
+  <img src="client1_upset.png" class="floating-client client3" alt="Client">
+  <img src="client2_doubt.png" class="floating-client client4" alt="Client">
+  <img src="client2_happy.png" class="floating-client client5" alt="Client">
+  <img src="client2_upset.png" class="floating-client client6" alt="Client">
+  <img src="client3_doubt.png" class="floating-client client7" alt="Client">
+  <img src="client3_upset.png" class="floating-client client8" alt="Client">
+  <img src="client4_doubt.png" class="floating-client client9" alt="Client">
+  <img src="client4_happy.png" class="floating-client client10" alt="Client">
+  <img src="client5_doubt.png" class="floating-client client11" alt="Client">
+  <img src="client5_happy.png" class="floating-client client12" alt="Client">
+  <img src="client7.png" class="floating-client client13" alt="Client">
+  <img src="client8.png" class="floating-client client14" alt="Client">
+  <img src="client9.png" class="floating-client client15" alt="Client">
+  <img src="client10.png" class="floating-client client16" alt="Client">
+  <img src="client11.png" class="floating-client client17" alt="Client">
+  <img src="client12.png" class="floating-client client18" alt="Client">
+  <img src="client13.png" class="floating-client client19" alt="Client">
+  <img src="client14.png" class="floating-client client20" alt="Client">
+  <img src="client16.png" class="floating-client client22" alt="Client">
+  <img src="client17.png" class="floating-client client23" alt="Client">
+
+  <div id="game-container">
+    <div id="user-profile">
+      <img id="user-profile-img" src="profile_placeholder.png" alt="Your Profile">
+    </div>
+    <div class="scene" id="scene5">
+      <h1>SUMMARY</h1>
+      <div id="activity-container">
+        <div id="client-header">
+          <img src="boss.png" id="client-avatar" alt="Client">
+          <div id="client-message">
+            "Congratulations on your first day of work! I see your potential as a digital advisor. Finish this crossword puzzle to promote!"
+          </div>
+        </div>
+        
+        <div class="scene">
+          <div class="activity-container">
+            <div class="clues">
+              <h2>Across</h2>
+              <ul>
+                <li>1. False media made using deep ___</li>
+                <li>6. AI makes ___ safety harder by spreading harmful content faster</li>
+              </ul>
+              <h2>Down</h2>
+              <ul>
+                <li>1. The __ in AI-generated audios are unnatural </li>
+                <li>2. Do not disclose any personal information on any __ </li>
+                <li>3. Awareness is __ to staying safe </li>
+                <li>4. A simple AI ___ can spread harmful content</li>
+              </ul>
+            </div>
+            <div>
+              <div class="crossword">
+                <input type="text" id="r1c1" maxlength="1">
+                <input type="text" id="r1c2" maxlength="1">
+                <input type="text" id="r1c3" maxlength="1">
+                <input type="text" id="r1c4" maxlength="1">
+                <input type="text" id="r2c1" maxlength="1">
+                <input type="text" id="r2c2" maxlength="1">
+                <input type="text" id="r2c3" maxlength="1">
+                <input type="text" id="r2c4" maxlength="1">
+                <input type="text" id="r3c1" maxlength="1">
+                <input type="text" id="r3c2" maxlength="1">
+                <input type="text" id="r3c3" maxlength="1">
+                <input type="text" id="r3c4" maxlength="1">
+                <input type="text" id="r4c1" maxlength="1">
+                <input type="text" id="r4c2" maxlength="1">
+                <input type="text" id="r4c3" maxlength="1">
+                <input type="text" id="r4c4" maxlength="1">
+              </div>
+              <div id="feedback"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="button-container">
+      <button class="button" id="checkBtn">Check Answers</button>
+      <button class="button" id="continue-button" style="display: none;">Continue</button>
+    </div>
+  </div>
+  <script>
+    const answers = {
+      r1c1: 'F', r1c2: 'A', r1c3: 'K', r1c4: 'E',
+      r2c1: 'L', r2c2: 'P', r2c3: 'E', r2c4: 'D',
+      r3c1: 'O', r3c2: 'P', r3c3: 'Y', r3c4: 'I',
+      r4c1: 'W', r4c2: 'E', r4c3: 'B', r4c4: 'T'
+    };
+
+    const checkBtn = document.getElementById('checkBtn');
+    const continueButton = document.getElementById('continue-button');
+    const feedback = document.getElementById('feedback');
+
+    checkBtn.addEventListener('click', function() {
+      let correct = 0;
+      let total = 16;
+      for (let i = 1; i <= 4; i++) {
+        for (let j = 1; j <= 4; j++) {
+          const cell = document.getElementById(`r${i}c${j}`);
+          const val = cell.value.toUpperCase();
+          const key = `r${i}c${j}`;
+          if (val === answers[key]) {
+            cell.classList.add('correct');
+            cell.classList.remove('incorrect');
+            correct++;
+          } else {
+            cell.classList.add('incorrect');
+            cell.classList.remove('correct');
+          }
+          cell.disabled = true;
+        }
+      }
+      
+      checkBtn.style.display = 'none';
+      continueButton.style.display = 'block';
+      
+      if (correct === total) {
+        feedback.textContent = 'Great job! You have been promoted!';
+      } else {
+        feedback.textContent = `${correct}/${total} correct.`;
+      }
+    });
+
+    continueButton.addEventListener('click', () => {
+      document.getElementById('game-container').classList.add('fade-out');
+      setTimeout(() => {
+        window.location.href = 'page8.html';
+      }, 500);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedProfile = localStorage.getItem('userProfileImg');
+      if (savedProfile) {
+        document.getElementById('user-profile-img').src = savedProfile;
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+

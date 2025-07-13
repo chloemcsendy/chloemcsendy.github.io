@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dear Advisor - Client 6 Activity</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #F4F0E6;
+            color: #3A4F63;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            image-rendering: pixelated;
+        }
+
+        .floating-client {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.7;
+            z-index: -1;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(5deg); }
+            50% { transform: translate(100px, 0) rotate(0deg); }
+            75% { transform: translate(50px, -50px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .floating-client {
+            width: 80px;
+            height: 80px;
+            opacity: 0.6;
+        }
+       .client1 { animation-delay: 0s; top: 3%; left: 2%; animation-duration: 35s; }
+    .client2 { animation-delay: -8s; top: 5%; left: 93%; animation-duration: 28s; }
+    .client3 { animation-delay: -15s; top: 92%; left: 7%; animation-duration: 42s; }
+    .client4 { animation-delay: -4s; top: 88%; left: 88%; animation-duration: 31s; }
+    .client5 { animation-delay: -12s; top: 12%; left: 15%; animation-duration: 38s; }
+    .client6 { animation-delay: -19s; top: 83%; left: 72%; animation-duration: 27s; }
+    .client7 { animation-delay: -3s; top: 25%; left: 83%; animation-duration: 45s; }
+    .client8 { animation-delay: -11s; top: 73%; left: 12%; animation-duration: 33s; }
+    .client9 { animation-delay: -7s; top: 8%; left: 65%; animation-duration: 40s; }
+    .client10 { animation-delay: -14s; top: 78%; left: 35%; animation-duration: 25s; }
+    .client11 { animation-delay: -2s; top: 22%; left: 38%; animation-duration: 48s; }
+    .client12 { animation-delay: -9s; top: 97%; left: 22%; animation-duration: 29s; }
+    .client13 { animation-delay: -17s; top: 4%; left: 78%; animation-duration: 36s; }
+    .client14 { animation-delay: -22s; top: 96%; left: 82%; animation-duration: 32s; }
+    .client16 { animation-delay: -24s; top: 68%; left: 92%; animation-duration: 26s; }
+    .client17 { animation-delay: -5s; top: 37%; left: 3%; animation-duration: 50s; }
+    .client19 { animation-delay: -20s; top: 13%; left: 97%; animation-duration: 24s; }
+    .client20 { animation-delay: -6s; top: 58%; left: 94%; animation-duration: 47s; }
+    .client21 { animation-delay: -16s; top: 94%; left: 4%; animation-duration: 31s; }
+    .client22 { animation-delay: -23s; top: 32%; left: 73%; animation-duration: 37s; }
+    .client23 { animation-delay: -7.5s; top: 63%; left: 27%; animation-duration: 52s; }
+    .client24 { animation-delay: -18s; top: 3%; left: 33%; animation-duration: 28s; }
+
+        #game-container {
+            width: 960px;
+            height: 540px;
+            background-color: #F8F4E3;
+            border: 8px solid #3A4F63;
+            box-shadow: 
+                0 0 15px rgba(58, 79, 99, 0.6),
+                0 0 30px rgba(232, 212, 176, 0.8);
+            position: relative;
+            overflow: hidden;
+            animation: 
+                frameGlow 2s ease-in-out infinite alternate,
+                gentleWiggle 5s ease-in-out infinite;
+        }
+        @keyframes frameGlow {
+    0% {
+        box-shadow: 
+            0 0 15px rgba(58, 79, 99, 0.6),
+            0 0 30px rgba(232, 212, 176, 0.8);
+    }
+    100% {
+        box-shadow: 
+            0 0 25px rgba(58, 79, 99, 0.8),
+            0 0 50px rgba(232, 212, 176, 1);
+    }
+}
+
+@keyframes gentleWiggle {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-3px) rotate(-0.5deg); }
+    50% { transform: translateX(3px) rotate(0.5deg); }
+    75% { transform: translateX(-3px) rotate(-0.5deg); }
+}
+        .scene {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            box-sizing: border-box;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin: 10px 0;
+            text-align: center;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        #user-profile {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #3A4F63;
+            overflow: hidden;
+            background-color: #D9D2C5;
+        }
+
+        #user-profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button {
+            padding: 12px 24px;
+            background-color: #3A4F63;
+            color: #F8F4E3;
+            border: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid #3A4F63;
+            margin: 5px;
+        }
+
+        .button:hover {
+            background-color: #F8F4E3;
+            color: #3A4F63;
+        }
+
+        #client-header {
+            display: flex;
+            align-items: center;
+            margin: 5px 0 15px 0;
+            width: 100%;
+            max-width: 850px;
+        }
+        
+        #client-avatar {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        #client-message {
+            flex: 1;
+            background: #F8F4E3;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Video Container Styles */
+        #video-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 15px auto;
+            background: #F8F4E3;
+            border: 2px solid #3A4F63;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #fake-video {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            gap: 20px;
+        }
+
+        #feedback-content {
+            display: none;
+            align-items: center;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 850px;
+        }
+        
+        #feedback-avatar {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        
+        #feedback-text {
+            flex: 1;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Feedback Buttons Container */
+        .feedback-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 850px;
+            padding-right: 20px;
+        }
+
+        /* Disabled button style */
+        .button:disabled {
+            background-color: #D9D2C5;
+            color: #9BA7B3;
+            border-color: #9BA7B3;
+            cursor: not-allowed;
+        }
+
+        .correct-highlight {
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 0 2px #3A4F63;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(58, 79, 99, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(58, 79, 99, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(58, 79, 99, 0); }
+        }
+
+        .scene::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scene::-webkit-scrollbar-track {
+            background: #F8F4E3;
+        }
+
+        .scene::-webkit-scrollbar-thumb {
+            background: #3A4F63;
+            border-radius: 4px;
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+   <img src="client1_happy.png" class="floating-client client1" alt="Client">
+  <img src="client1_doubt.png" class="floating-client client2" alt="Client">
+  <img src="client1_upset.png" class="floating-client client3" alt="Client">
+  <img src="client2_doubt.png" class="floating-client client4" alt="Client">
+  <img src="client2_happy.png" class="floating-client client5" alt="Client">
+  <img src="client2_upset.png" class="floating-client client6" alt="Client">
+  <img src="client3_doubt.png" class="floating-client client7" alt="Client">
+  <img src="client3_upset.png" class="floating-client client8" alt="Client">
+  <img src="client4_doubt.png" class="floating-client client9" alt="Client">
+  <img src="client4_happy.png" class="floating-client client10" alt="Client">
+  <img src="client5_doubt.png" class="floating-client client11" alt="Client">
+  <img src="client5_happy.png" class="floating-client client12" alt="Client">
+  <img src="client7.png" class="floating-client client13" alt="Client">
+  <img src="client8.png" class="floating-client client14" alt="Client">
+  <img src="client9.png" class="floating-client client15" alt="Client">
+  <img src="client10.png" class="floating-client client16" alt="Client">
+  <img src="client11.png" class="floating-client client17" alt="Client">
+  <img src="client12.png" class="floating-client client18" alt="Client">
+  <img src="client13.png" class="floating-client client19" alt="Client">
+  <img src="client14.png" class="floating-client client20" alt="Client">
+  <img src="client16.png" class="floating-client client22" alt="Client">
+  <img src="client17.png" class="floating-client client23" alt="Client">
+
+    <!-- Main game container -->
+    <div id="game-container">
+        <!-- User Profile -->
+        <div id="user-profile">
+            <img id="user-profile-img" src="profile_placeholder.png" alt="Your Profile">
+        </div>
+
+        <!-- Scene: Fake Video Activity -->
+        <div class="scene" id="scene">
+            <h1>CLIENT 6</h1>
+            <div id="activity-container">
+                <div id="client-header">
+                    <img src="client6_doubt.png" id="client-avatar" alt="Client">
+                    <div id="client-message">
+                        "Hey Advisor! Is it true that you're allowed to have wild cats as pets? Check out this video!"
+                    </div>
+                </div>
+                
+                <div id="video-container">
+                    <video id="fake-video" controls>
+                        <source src="activity6_fake.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="button" id="believe-button">Yes it's real!</button>
+                    <button class="button" id="doubt-button">Seems too good to be true...</button>
+                </div>
+                
+                <div id="feedback-content">
+                    <img src="" id="feedback-avatar" alt="Feedback">
+                    <div id="feedback-text"></div>
+                </div>
+                
+                <div class="feedback-buttons">
+                    <button class="button" id="try-again-button" style="display: none;">Try Again</button>
+                    <button class="button" id="continue-button" style="display: none;">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const userProfileImg = document.getElementById('user-profile-img');
+        const continueButton = document.getElementById('continue-button');
+        const tryAgainButton = document.getElementById('try-again-button');
+        const believeButton = document.getElementById('believe-button');
+        const doubtButton = document.getElementById('doubt-button');
+        const feedbackContent = document.getElementById('feedback-content');
+        const feedbackAvatar = document.getElementById('feedback-avatar');
+        const feedbackText = document.getElementById('feedback-text');
+        const video = document.getElementById('fake-video');
+        
+        // Track correct choice
+        let correctChoiceMade = false;
+        
+        // Reset activity
+        function resetActivity() {
+            // Hide feedback and buttons
+            feedbackContent.style.display = 'none';
+            continueButton.style.display = 'none';
+            tryAgainButton.style.display = 'none';
+            
+            // Reset state
+            correctChoiceMade = false;
+            
+            // Enable buttons
+            believeButton.disabled = false;
+            doubtButton.disabled = false;
+            doubtButton.classList.remove('correct-highlight');
+            
+            // Reset video
+            video.currentTime = 0;
+            video.play().catch(e => console.log("Auto-play prevented:", e));
+        }
+        
+        
+        function handleIncorrectChoice() {
+            // Disable buttons
+            believeButton.disabled = true;
+            doubtButton.disabled = true;
+            
+            // Show feedback
+            feedbackContent.style.display = 'flex';
+            feedbackAvatar.src = "client6_upset.png";
+            feedbackText.innerHTML = "<strong>This was an AI-generated scam!</strong> False information may cause unnecessary panic. Always verify on reputable sources.";
+            
+            
+            tryAgainButton.style.display = 'block';
+            continueButton.style.display = 'none';
+            doubtButton.classList.add('correct-highlight');
+        }
+        
+        
+        function handleCorrectChoice() {
+            // Disable buttons
+            believeButton.disabled = true;
+            doubtButton.disabled = true;
+            
+            // Show feedback
+            feedbackContent.style.display = 'flex';
+            feedbackAvatar.src = "client6_happy.png";
+            feedbackText.innerHTML = "<strong>Correct!</strong> Always verify sketchy information on reputable sources.";
+            
+            // Mark as correct and show continue button
+            correctChoiceMade = true;
+            continueButton.style.display = 'block';
+            tryAgainButton.style.display = 'none';
+        }
+        
+        // Event listeners
+        believeButton.addEventListener('click', handleIncorrectChoice);
+        doubtButton.addEventListener('click', handleCorrectChoice);
+        tryAgainButton.addEventListener('click', resetActivity);
+        
+        continueButton.addEventListener('click', () => {
+            if (correctChoiceMade) {
+                document.getElementById('game-container').classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = 'page7.html';
+                }, 500);
+            }
+        });
+        
+        // Load user profile if available
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedProfile = localStorage.getItem('userProfileImg');
+            
+            if (savedProfile) {
+                userProfileImg.src = savedProfile;
+            }
+            
+            // Auto-play the video (with muted audio to comply with browser policies)
+            video.muted = true;
+            video.play().catch(e => console.log("Auto-play prevented:", e));
+        });
+    </script>
+</body>
+</html>
