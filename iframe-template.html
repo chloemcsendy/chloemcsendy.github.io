@@ -7,6 +7,61 @@
         <title>Your title here</title>
         
         <style>
+            .floating-client {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.7;
+            z-index: -1;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, 50px) rotate(5deg); }
+            50% { transform: translate(100px, 0) rotate(0deg); }
+            75% { transform: translate(50px, -50px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .floating-client {
+            width: 80px;
+            height: 80px;
+            opacity: 0.6;
+        }
+        .client1 { animation-delay: 0s; top: 3%; left: 2%; animation-duration: 35s; }
+        .client2 { animation-delay: -8s; top: 5%; left: 93%; animation-duration: 28s; }
+        .client3 { animation-delay: -15s; top: 92%; left: 7%; animation-duration: 42s; }
+        .client4 { animation-delay: -4s; top: 88%; left: 88%; animation-duration: 31s; }
+        .client5 { animation-delay: -12s; top: 12%; left: 15%; animation-duration: 38s; }
+        .client6 { animation-delay: -19s; top: 83%; left: 72%; animation-duration: 27s; }
+        .client7 { animation-delay: -3s; top: 25%; left: 83%; animation-duration: 45s; }
+        .client8 { animation-delay: -11s; top: 73%; left: 12%; animation-duration: 33s; }
+        .client9 { animation-delay: -7s; top: 8%; left: 65%; animation-duration: 40s; }
+        .client10 { animation-delay: -14s; top: 78%; left: 35%; animation-duration: 25s; }
+        .client11 { animation-delay: -2s; top: 22%; left: 38%; animation-duration: 48s; }
+        .client12 { animation-delay: -9s; top: 97%; left: 22%; animation-duration: 29s; }
+        .client13 { animation-delay: -17s; top: 4%; left: 78%; animation-duration: 36s; }
+        .client14 { animation-delay: -22s; top: 96%; left: 82%; animation-duration: 32s; }
+        .client16 { animation-delay: -24s; top: 68%; left: 92%; animation-duration: 26s; }
+        .client17 { animation-delay: -5s; top: 37%; left: 3%; animation-duration: 50s; }
+        .client19 { animation-delay: -20s; top: 13%; left: 97%; animation-duration: 24s; }
+        .client20 { animation-delay: -6s; top: 58%; left: 94%; animation-duration: 47s; }
+        .client21 { animation-delay: -16s; top: 94%; left: 4%; animation-duration: 31s; }
+        .client22 { animation-delay: -23s; top: 32%; left: 73%; animation-duration: 37s; }
+        .client23 { animation-delay: -7.5s; top: 63%; left: 27%; animation-duration: 52s; }
+        .client24 { animation-delay: -18s; top: 3%; left: 33%; animation-duration: 28s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            15% { transform: translate(30px, 40px) rotate(8deg); }
+            30% { transform: translate(70px, 10px) rotate(-5deg); }
+            45% { transform: translate(120px, 50px) rotate(12deg); }
+            60% { transform: translate(80px, -30px) rotate(-8deg); }
+            75% { transform: translate(40px, -60px) rotate(5deg); }
+            90% { transform: translate(-20px, -30px) rotate(-3deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
             body{
                 margin:0;
                 padding:0;
