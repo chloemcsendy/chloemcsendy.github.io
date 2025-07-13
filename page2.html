@@ -92,26 +92,7 @@
                 frameGlow 2s ease-in-out infinite alternate,
                 gentleWiggle 5s ease-in-out infinite;
         }
-        @keyframes frameGlow {
-    0% {
-        box-shadow: 
-            0 0 15px rgba(58, 79, 99, 0.6),
-            0 0 30px rgba(232, 212, 176, 0.8);
-    }
-    100% {
-        box-shadow: 
-            0 0 25px rgba(58, 79, 99, 0.8),
-            0 0 50px rgba(232, 212, 176, 1);
-    }
-}
-
-@keyframes gentleWiggle {
-    0%, 100% { transform: translateX(0) rotate(0deg); }
-    25% { transform: translateX(-3px) rotate(-0.5deg); }
-    50% { transform: translateX(3px) rotate(0.5deg); }
-    75% { transform: translateX(-3px) rotate(-0.5deg); }
-}
-
+        
         .scene {
             display: flex;
             width: 100%;
