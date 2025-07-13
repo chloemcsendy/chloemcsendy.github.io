@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MISSION: POSSIBLE - Escape AI Quest</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="game-container" class="intro-background">
+    <div class="background-pattern"></div>
+
+    <!-- Agent Info (hidden until confirmation) -->
+    <div id="agent-info">
+      <img id="agent-photo-preview" src="" alt="Agent"/>
+      <span id="agent-name-display"></span>
+    </div>
+
+    <!-- 1. Intro Screen -->
+    <div id="intro-screen" class="screen">
+      <h1 id="typed-title"></h1>
+      <p id="typed-subtitle"></p>
+      <button id="start-btn" class="hidden animate-scale-in" onclick="goToVerification()">
+        Enter Mission
+      </button>
+    </div>
+
+    <div id="verification-screen" class="screen hidden">
+  <h2>🕵️ Agent Verification</h2>
+  <div class="verification-main">
+    <div id="camera-box">
+      <p class="camera-label">Facial verification</p>
+      <video id="video" autoplay playsinline></video>
+      <canvas id="snapshot" style="display:none;"></canvas>
+      <img id="photo-preview" style="display:none;" alt="snapshot" />
+      <div class="verif-btns">
+        <button id="capture-btn">📸 Capture</button>
+        <button id="retake-btn" style="display:none;">🔄 Retake</button>
+        <button id="confirm-btn" style="display:none;">✅ Confirm</button>
+      </div>
+    </div>
+    <div class="verification-controls">
+      <p>Enter Agent Code Name</p>
+    
+      <input id="agent-name-input"
+             type="text"
+             placeholder="Agent Code Name" />
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- 3. Briefing Screen -->
+    <div id="briefing-screen" class="screen hidden">
+  <div class="folder-container" id="folder">
+    <div class="folder-front"></div>
+    <div class="briefing-paper">
+      <h2>CLASSIFIED MISSION BRIEFING</h2>
+      <p id="briefing-text"></p>
+      <button id="begin-mission-btn" class="hidden" onclick="showScreen('clue-screen')">
+  Begin Mission
+</button>
+    </div>
+  </div>
+</div>
+
+<!-- Clue screen-->
+<div id="clue-screen" class="screen hidden">
+  <h2>MISSION CLUES</h2>
+
+  <div class="clue-file">
+    <ul style="list-style: none; padding-left: 1rem; margin:0;">
+      <li>• <strong>Your safety override code: ALPHA7</strong></li>
+      <li>• <strong>The year AI blew up: 2023</strong></li>
+    </ul>
+  </div>
+
+  <p><em>Memorize these, they’re your <strong>keys</strong> to success!</em></p>
+  <button id="clue-continue-btn" onclick="startQuiz()">
+    Proceed to Quiz
+  </button>
+</div>
+
+      <!-- ===================== Quiz Screen ===================== -->
+<div id="quiz-screen" class="screen hidden">
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+
+  <h2 id="question-title"></h2>
+  <div id="question-content"></div>
+  <div id="question-options" class="quiz-options"></div>
+</div>
+
+<!-- 1) Incoming‐Call Screen -->
+<div id="incoming-call-screen" class="screen hidden">
+  <h2>Incoming call from HQ…</h2>
+  <button id="answer-btn">📞 Answer</button>
+  <audio id="ringtone-audio" src="ringtone.mp3" loop preload="auto"></audio>
+</div>
+
+<!-- 2) Audio + Subtitles Screen -->
+<div id="audio-playback-screen" class="screen hidden">
+  <!-- just use any short MP3 named boss-message.mp3 in the same folder -->
+  <audio id="boss-audio" src="boss-message.mp3"></audio>
+  <p id="subtitles"></p>
+</div>
+
+<!-- 3) Code Entry Screen -->
+<div id="code-entry-screen" class="screen hidden">
+  <input id="override-code" placeholder="Enter override code" />
+  <button id="code-submit">Submit</button>
+  <p id="code-response"></p>
+</div>
+
+    <!-- Correct / Wrong Feedback -->
+    <div id="correct-feedback" class="screen hidden correct-feedback">
+      <p id="correct-message"></p>
+      <button onclick="showDetective()">Detective Report</button>
+    </div>
+    <div id="wrong-feedback" class="screen hidden wrong-feedback">
+      <p id="wrong-message"></p>
+      <button onclick="tryAgain()">Try Again</button>
+    </div>
+
+    <!-- Detective Screen -->
+    <div id="detective-screen" class="screen hidden detective-container">
+  <img class="detective-img" src="" alt="Detective"/>
+  <p id="detective-explanation"></p>
+  <button onclick="continueFromDetective()">Continue</button>
+</div>
+
+
+    <!-- 5. Red Herring Screen -->
+<div id="red-screen" class="screen hidden countdown-screen">
+  <h2 style="z-index: 9999;">🚨 SECURITY BREACH DETECTED 🚨</h2>
+  <p  style="z-index: 9999;">⚠️ AI INFILTRATION IN PROGRESS ⚠️</p>
+  <p style="z-index: 9999;">Agent, every time you identified an AI pattern, you weren’t just learning to detect threats… you were training the AI to think just like you.
+  </p>
+  <div class="dramatic-countdown" id="countdown">10</div>
+  <button onclick="beginEscape()" id="escape-btn" class="animate-scale-in">
+    Initiate Escape Protocol
+  </button>
+  <audio id="tick-sound" src="countdown.mp3" preload="auto"></audio>
+</div>
+
+
+<div id="laser-screen" class="screen hidden">
+  <h2>🔴 Laser Security Grid</h2>
+  <p>Navigate through the laser grid by clicking the safe path. Red areas are laser beams!</p>
+
+  <div class="laser-grid"></div>
+</div>
+    <!-- Escape / Puzzle -->
+    <div id="escape-screen" class="screen hidden">
+  <h2 id="puzzle-title"></h2>
+  <p id="puzzle-instruction"></p>
+  <p id="puzzle-result" class="retry-message"></p>
+  <div id="puzzle-container"></div>
+  <div id="retry-section" class="retry-message hidden">
+    <button onclick="retryPuzzle()">Retry</button>
+  </div>
+</div>
+<div id="surveillance-screen" class="screen hidden">
+  <img src="fakeigaccount.jpg" style="width: 200px; border: 2px solid lime;"/>
+</div>
+    <!-- Puzzle Success -->
+    <div id="puzzle-success" class="screen hidden feedback-container">
+      <p id="puzzle-explanation"></p>
+      <button onclick="continueFromPuzzle()">Next Puzzle</button>
+    </div>
+
+    <!-- Final Victory -->
+    <div id="final-screen" class="screen hidden">
+      <h1 class="victory-title">Mission Accomplished!</h1>
+      <p>Congratulations, Agent. You have successfully completed all challenges and stopped AI from taking over the world.</p>
+      <button id="restart-btn">Restart Mission</button>
+
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+
+</html>  
+  
